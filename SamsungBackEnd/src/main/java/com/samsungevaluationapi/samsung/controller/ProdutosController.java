@@ -9,9 +9,11 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/produtos")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProdutosController {
 
     @Autowired
@@ -19,8 +21,10 @@ public class ProdutosController {
 
 
     @GetMapping("/moedas")
-    public List<MoedaDTO> getAllMoedas() {
-        return produtosService.getAllMoedas();
+    public List<String> getAllMoedas() {
+        return produtosService.getAllMoedas().stream()
+                .map(MoedaDTO::getCurrencyCode)
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/buscarDocumentoComFiltro")

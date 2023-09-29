@@ -1,0 +1,50 @@
+<div>
+    <h2>Lista de Documentos</h2>
+    <div class="form-group">
+      <label for="documentNumberFilter">Número do Documento:</label>
+      <input type="text" id="documentNumberFilter" [(ngModel)]="documentNumberFilter" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="startDateFilter">Data de Início:</label>
+      <input type="date" id="startDateFilter" [(ngModel)]="startDateFilter" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="endDateFilter">Data de Término:</label>
+      <input type="date" id="endDateFilter" [(ngModel)]="endDateFilter" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="currencyCodeFilter">Código da Moeda:</label>
+      <select id="currencyCodeFilter" [(ngModel)]="currencyCodeFilter" class="form-control">
+        <option *ngFor="let currency of currencyOptions" [value]="currency">{{ currency }}</option>
+      </select>
+    </div>
+    <button (click)="filterDocuments()" class="btn btn-primary">Filtrar</button>
+  </div>
+  <div>
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Document Number</th>
+          <th>Document Date</th>
+          <th>Currency Code</th>
+          <th>Currency Description</th>
+          <th>Document Value</th>
+          <th>Document Value USD</th>
+          <th>Document Value PEN</th>
+          <th>Document Value BRL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let document of documents">
+          <td>{{ document.documentNumber }}</td>
+          <td>{{ document.documentDate }}</td>
+          <td>{{ document.currencyCode }}</td>
+          <td>{{ document.currencyDesc }}</td>
+          <td>{{ document.documentValue }}</td>
+          <td>{{ document.documentValueUSD }}</td>
+          <td>{{ document.documentValuePEN }}</td>
+          <td>{{ document.documentValueBRL }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
