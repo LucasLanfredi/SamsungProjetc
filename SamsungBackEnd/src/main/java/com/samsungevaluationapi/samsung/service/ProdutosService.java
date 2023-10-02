@@ -123,7 +123,7 @@ public class ProdutosService {
             String documentNumberFilter,
             LocalDate startDateFilter,
             LocalDate endDateFilter,
-            String currencyCodeFilter
+            List<String> currencyCodeFilter
     ) {
         List<DocumentoDTO> documentoDTOs = getAllDocumentos();
         List<MoedaDTO> moedas = getAllMoedas();
@@ -140,7 +140,7 @@ public class ProdutosService {
             if ((documentNumberFilter == null || documentoDTO.getDocumentNumber().equals(documentNumberFilter))
                     && (startDateFilter == null || !documentDate.isBefore(startDateFilter))
                     && (endDateFilter == null || !documentDate.isAfter(endDateFilter))
-                    && (currencyCodeFilter == null || documentoDTO.getCurrencyCode().equals(currencyCodeFilter))) {
+                    && (currencyCodeFilter == null || currencyCodeFilter.contains(documentoDTO.getCurrencyCode()))) {
 
                 DocumentoResponse documentoResponse = new DocumentoResponse();
                 documentoResponse.setDocumentId(documentoDTO.getDocumentId());
@@ -171,6 +171,7 @@ public class ProdutosService {
 
         return documentosResponse;
     }
+
 
     private Double converterMoeda(
             DocumentoDTO documentoDTO,

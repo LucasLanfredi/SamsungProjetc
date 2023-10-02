@@ -1,3 +1,7 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+</head>
+
 <div>
     <h2>Lista de Documentos</h2>
     <div class="form-group">
@@ -14,11 +18,12 @@
     </div>
     <div class="form-group">
       <label for="currencyCodeFilter">Código da Moeda:</label>
-      <select id="currencyCodeFilter" [(ngModel)]="currencyCodeFilter" class="form-control">
+      <select id="currencyCodeFilter" [(ngModel)]="selectedCurrencyCodes" class="form-control" multiple>
         <option *ngFor="let currency of currencyOptions" [value]="currency">{{ currency }}</option>
       </select>
     </div>
     <button (click)="filterDocuments()" class="btn btn-primary">Filtrar</button>
+    <button (click)="clearFilters()" class="btn btn-secondary">Limpar</button>    
   </div>
   <div>
     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover">

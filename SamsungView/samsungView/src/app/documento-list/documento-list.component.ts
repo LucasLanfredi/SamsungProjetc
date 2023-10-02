@@ -19,6 +19,8 @@ export class DocumentoListComponent implements OnInit, AfterViewInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
+  selectedCurrencyCodes: string[] = [];
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -44,12 +46,20 @@ export class DocumentoListComponent implements OnInit, AfterViewInit {
       documentNumberFilter: this.documentNumberFilter || null,
       startDateFilter: this.startDateFilter || null,
       endDateFilter: this.endDateFilter || null,
-      currencyCodeFilter: this.currencyCodeFilter || null,
+      currencyCodeFilter: this.selectedCurrencyCodes || null,
     };
 
     this.http.post<any>('http://localhost:8080/produtos/buscarDocumentoComFiltro', filter).subscribe((data: any[]) => {
       this.documents = data;
       this.dtTrigger.next(null); 
     });
+  }
+
+  // Método para limpar os filtros
+  clearFilters(): void {
+    this.documentNumberFilter = null;
+    this.startDateFilter = null;
+    this.endDateFilter = null;
+    this.ngOnInit();
   }
 }

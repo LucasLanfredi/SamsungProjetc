@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ProdutosFiltersDTO {
     @Nullable
@@ -21,13 +22,13 @@ public class ProdutosFiltersDTO {
     private LocalDate endDateFilter;
     @Nullable
     @JsonProperty(value = "currencyCodeFilter")
-    private String currencyCodeFilter;
+    private List<String> currencyCodeFilter;
 
     public ProdutosFiltersDTO() {
     }
 
     public ProdutosFiltersDTO(@Nullable String documentNumberFilter, @Nullable LocalDate startDateFilter,
-                              @Nullable LocalDate endDateFilter, @Nullable String currencyCodeFilter) {
+                              @Nullable LocalDate endDateFilter, @Nullable List<String> currencyCodeFilter) {
         this.documentNumberFilter = documentNumberFilter;
         this.startDateFilter = startDateFilter;
         this.endDateFilter = endDateFilter;
@@ -62,11 +63,11 @@ public class ProdutosFiltersDTO {
     }
 
     @Nullable
-    public String getCurrencyCodeFilter() {
+    public List<String> getCurrencyCodeFilter() {
         return currencyCodeFilter;
     }
 
-    public void setCurrencyCodeFilter(@Nullable String currencyCodeFilter) {
+    public void setCurrencyCodeFilter(@Nullable List<String> currencyCodeFilter) {
         this.currencyCodeFilter = currencyCodeFilter;
     }
 }
